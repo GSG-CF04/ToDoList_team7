@@ -12,7 +12,6 @@
     width:100% ;
      height:47vh ; 
     border-radius:  0% 0% 10% 10%;
- 
 }
 .rest-todo{
     width: 100%;
@@ -73,7 +72,7 @@ input[type=text]{
     margin: 10px;
 }
 ::placeholder {
-    font-style: italic;
+    font-family: arial;
     font-size: 1em;
     color: #6D6D6D;
     background: #E5E5E5;
@@ -89,12 +88,13 @@ input[type=text]{
     color: rgb(255, 255, 255);
     width: 289px;
 height: 36px;
-margin-top: 4vh;
+margin-top: 3vh;
 background: #5686E1;
 border-radius: 5px;
 display: flex;
 justify-content: center;
 align-items: center;
+border: none;
 }
 
 .icons {
@@ -155,6 +155,26 @@ margin-top: 15px;
 }
 .dark-mode{
     color: #FFFFFF;
+}
+@media(min-width:1020px){
+    .all-section{
+        width: 40%;
+      margin: 0 auto;
+      
+    }
+    .section-todo{
+     
+        width:100% ;
+         height:54vh ; 
+        border-radius:  0% 0% 10% 10%;
+     
+    }
+    .to-do-list{
+        width: 30%;
+        }
+        .img-list{
+            width: 10%;
+        }
 }
  
  
