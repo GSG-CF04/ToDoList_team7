@@ -93,8 +93,8 @@ arr.push({item:para.innerText,checked:false,index:arr.length})
         document.getElementById('write-text').value = "" 
  
 
-
 }
+
 function deleteList(event){
         let value = event.target.parentNode.parentNode.textContent
         
@@ -127,7 +127,7 @@ function deleteList(event){
                             if (item== e.target){i = index}
                         }  
                     )  
-                    
+
                 arr[arr.length-1-i].item = document.querySelectorAll(".para-text")[i].innerText
                 
                 localStorage.setItem('items',JSON.stringify(arr))
@@ -166,4 +166,10 @@ function deleteList(event){
     
     }
     }
+    document.getElementById('text-rest').addEventListener("click" , onClick);
+function onClick(e) {
+    document.getElementById("list-order").innerText = "";
+    localStorage.removeItem("items")
+};
+
     }
