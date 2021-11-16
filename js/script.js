@@ -16,7 +16,7 @@ let arr = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items
 
 
 function list(){
-  
+  if(text.value){
 section = document.createElement('section')
 section.setAttribute('class', 'container')
 
@@ -35,19 +35,6 @@ check.setAttribute('id','check')
 check.setAttribute('alt','check')
 check.addEventListener("click", taskDone)
 
-function taskDone(e) {
-    let done = e.target.parentNode.parentNode
-    done.classList.toggle('active')
-    let i;
-   document.querySelectorAll("#check").forEach(
-       function (item, index){
-           if (item==e.target){i =arr.length-1-index}
-       }
-   )
-   arr[i].checked? arr[i].checked= false:arr[i].checked= true
-   localStorage.setItem('items', JSON.stringify(arr));
-   
-}
 
 erase = document.createElement('input')
 erase.setAttribute('src','img/delete.png')
@@ -67,8 +54,10 @@ arr.push({item:para.innerText,checked:false,index:arr.length})
 
         localStorage.setItem('items', JSON.stringify(arr));
         document.getElementById('write-text').value = "" 
- 
-
+  
+  }else{
+      alert("please type something")
+  }
 
 }
 function deleteList(event){
@@ -78,6 +67,21 @@ function deleteList(event){
         localStorage.setItem('items',JSON.stringify(arr))
         event.target.parentNode.parentNode.remove()
     }
+
+    
+function taskDone(e) {
+    let done = e.target.parentNode.parentNode
+    done.classList.toggle('active')
+    let i;
+   document.querySelectorAll("#check").forEach(
+       function (item, index){
+           if (item==e.target){i =arr.length-1-index}
+       }
+   )
+   arr[i].checked? arr[i].checked= false:arr[i].checked= true
+   localStorage.setItem('items', JSON.stringify(arr));
+   
+}
 
 
     window.onload = function()  {
