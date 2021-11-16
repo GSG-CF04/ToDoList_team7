@@ -33,7 +33,22 @@ check.setAttribute('src','img/check.png')
 check.setAttribute('type','image')
 check.setAttribute('id','check')
 check.setAttribute('alt','check')
-check.setAttribute("onclick","******************")
+check.addEventListener("click", taskDone)
+
+function taskDone(e) {
+    let done = e.target.parentNode.parentNode
+    done.classList.toggle('active')
+    let i;
+   document.querySelectorAll("#check").forEach(
+       function (item, index){
+           if (item==e.target){i =arr.length-1-index}
+       }
+   )
+   arr[i].checked? arr[i].checked= false:arr[i].checked= true
+   localStorage.setItem('items', JSON.stringify(arr));
+   console.log(done);
+   
+}
 
 erase = document.createElement('input')
 erase.setAttribute('src','img/delete.png')
@@ -77,6 +92,10 @@ function deleteList(event){
     
                 section = document.createElement('section')
                 section.setAttribute('class', 'container')
+                if(itemsArray[i].checked){ 
+                    section.classList.toggle('active')
+            
+                }
     
                 para = document.createElement('p')
                 para.setAttribute('class','para-text')
@@ -91,7 +110,22 @@ function deleteList(event){
                 check.setAttribute('type','image')
                 check.setAttribute('id','check')
                 check.setAttribute('alt','check')
-                check.setAttribute("onclick","**")
+                check.addEventListener("click", taskDone)
+
+                function taskDone(e) {
+                    let done = e.target.parentNode.parentNode
+                    done.classList.toggle('active')
+                    let i;
+                   document.querySelectorAll("#check").forEach(
+                       function (item, index){
+                           if (item==e.target){i =arr.length-1-index}
+                       }
+                   )
+                   arr[i].checked? arr[i].checked= false:arr[i].checked= true
+                   localStorage.setItem('items', JSON.stringify(arr));
+                   console.log(done);
+                   
+                }
     
                 erase = document.createElement('input')
                 erase.setAttribute('src','img/delete.png')
