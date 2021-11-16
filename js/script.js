@@ -15,6 +15,19 @@ text.addEventListener('keydown',(e)=>{
 let arr = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
 
 
+function saveChange(e){
+    let i ;
+    document.querySelectorAll(".para-text").forEach(
+        function (item, index){
+            if (item== e.target){i = index}
+        }
+    )  
+       let divSave = document.querySelectorAll('.save')[i]
+    
+    divSave.style.display ='block'
+}
+
+
 function list(){
   if(text.value){
 section = document.createElement('section')
@@ -22,7 +35,31 @@ section.setAttribute('class', 'container')
 
 para = document.createElement('p')
 para.setAttribute('class','para-text')
+para.setAttribute ("contenteditable", "true")
+para.addEventListener ('click', saveChange) 
 para.innerText = text.value
+
+
+let save = document.createElement('div')
+save.setAttribute('class','save')
+save.addEventListener ("click", function(e) {
+    let i ;
+    document.querySelectorAll(".save").forEach(
+        function (item, index){
+            if (item== e.target){i = index}
+        }  
+    )  
+    
+arr[arr.length-1-i].item = document.querySelectorAll(".para-text")[i].innerText
+
+localStorage.setItem('items',JSON.stringify(arr))
+
+  save.style.display ='none'
+
+})
+save.innerText = 'save'
+save.style.display ='none'
+
 
 cDiv = document.createElement('div')
 cDiv.setAttribute('class','two-buttons')
@@ -44,12 +81,12 @@ erase.setAttribute('alt','delete')
 erase.setAttribute("onclick","deleteList(event)")
 
 section.appendChild(para)
+section.appendChild(save)
 cDiv.appendChild(check)
 cDiv.appendChild(erase)
 section.appendChild(cDiv)
 eDiv.insertBefore(section,eDiv.children[0])
 
-console.log(eDiv.children[0])
 arr.push({item:para.innerText,checked:false,index:arr.length})
 
         localStorage.setItem('items', JSON.stringify(arr));
@@ -60,6 +97,7 @@ arr.push({item:para.innerText,checked:false,index:arr.length})
   }
 
 }
+
 function deleteList(event){
         let value = event.target.parentNode.parentNode.textContent
         
@@ -85,7 +123,6 @@ function taskDone(e) {
 
 
     window.onload = function()  {
-        console.log(localStorage.getItem('items'))
         if(localStorage.getItem('items')){
         itemsArray=JSON.parse(localStorage.getItem('items'))
             for(let i=0; i<itemsArray.length;i++){
@@ -98,8 +135,31 @@ function taskDone(e) {
                 }
     
                 para = document.createElement('p')
+                para.setAttribute ("contenteditable", "true")
+                para.addEventListener ('click', saveChange) 
                 para.setAttribute('class','para-text')
                 para.innerText = arr[i].item
+
+                let save = document.createElement('div')
+                save.setAttribute('class','save')
+                save.addEventListener ("click", function(e) {
+                    let i ;
+                    document.querySelectorAll(".save").forEach(
+                        function (item, index){
+                            if (item== e.target){i = index}
+                        }  
+                    )  
+
+                arr[arr.length-1-i].item = document.querySelectorAll(".para-text")[i].innerText
+                
+                localStorage.setItem('items',JSON.stringify(arr))
+                
+                  save.style.display ='none'
+                
+                })
+                save.innerText = 'save'
+                save.style.display ='none'
+                
     
                 cDiv = document.createElement('div')
                 cDiv.setAttribute('class','two-buttons')
@@ -134,6 +194,7 @@ function taskDone(e) {
                 erase.addEventListener("click",deleteList)
     
                 section.appendChild(para)
+                section.appendChild(save)
                 cDiv.appendChild(check)
                 cDiv.appendChild(erase)
                 section.appendChild(cDiv)
@@ -141,7 +202,14 @@ function taskDone(e) {
     
     }
     }
+    document.getElementById('text-rest').addEventListener("click" , onClick);
+function onClick(e) {
+    document.getElementById("list-order").innerText = "";
+    localStorage.removeItem("items")
+};
+
     }
+    
 
     
 // Dark Mode Code
