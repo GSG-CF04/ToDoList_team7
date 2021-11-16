@@ -46,7 +46,6 @@ function taskDone(e) {
    )
    arr[i].checked? arr[i].checked= false:arr[i].checked= true
    localStorage.setItem('items', JSON.stringify(arr));
-   console.log(done);
    
 }
 
@@ -61,7 +60,6 @@ section.appendChild(para)
 cDiv.appendChild(check)
 cDiv.appendChild(erase)
 section.appendChild(cDiv)
-//eDiv.appendChild(section)
 eDiv.insertBefore(section,eDiv.children[0])
 
 console.log(eDiv.children[0])
@@ -69,13 +67,11 @@ arr.push({item:para.innerText,checked:false,index:arr.length})
 
         localStorage.setItem('items', JSON.stringify(arr));
         document.getElementById('write-text').value = "" 
-     console.log(arr)
  
 
 
 }
 function deleteList(event){
-   console.log(event.target)
         let value = event.target.parentNode.parentNode.textContent
         
         arr.splice(arr.findIndex(i => i.item === value), 1); 
@@ -123,7 +119,6 @@ function deleteList(event){
                    )
                    arr[i].checked? arr[i].checked= false:arr[i].checked= true
                    localStorage.setItem('items', JSON.stringify(arr));
-                   console.log(done);
                    
                 }
     
@@ -139,8 +134,50 @@ function deleteList(event){
                 cDiv.appendChild(erase)
                 section.appendChild(cDiv)
                 eDiv.insertBefore(section,eDiv.children[0])
-                console.log(eDiv.children[0])
     
     }
     }
     }
+
+    
+// Dark Mode Code
+
+let dark = document.getElementsByClassName('moon-img')[0]
+let bg = document.getElementsByClassName('section-todo')[0]
+let task = document.getElementsByClassName('task-to-do')[0]
+let heading = document.getElementsByClassName('list-p')[0]
+let photo = document.getElementsByClassName('moon-img')[0]
+let situation = 1
+
+dark.onclick=function (){
+
+if(situation){
+bg.classList.add('dark-mode-bg')
+task.classList.add('dark-mode')
+heading.classList.add('dark-mode')
+photo.setAttribute('src', 'img/ic_baseline-light-mode.png')
+if (section){
+    
+section.classList.add('dark-mode-bg')
+para.classList.add('dark-mode')
+}
+
+situation = 0;
+}
+
+else{
+    
+bg.classList.remove('dark-mode-bg')
+task.classList.remove('dark-mode')
+heading.classList.remove('dark-mode')
+photo.setAttribute('src', 'img/Vector.png')
+if (section){
+    section.classList.remove('dark-mode-bg')
+para.classList.remove('dark-mode')
+}
+
+
+situation = 1
+}
+
+}
