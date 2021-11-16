@@ -60,9 +60,9 @@ arr.push({item:para.innerText,checked:false,index:arr.length})
 
 }
 function deleteList(event){
-   
+   console.log(event.target)
         let value = event.target.parentNode.parentNode.textContent
-        console.log(value)
+        
         arr.splice(arr.findIndex(i => i.item === value), 1); 
         localStorage.setItem('items',JSON.stringify(arr))
         event.target.parentNode.parentNode.remove()
@@ -98,7 +98,7 @@ function deleteList(event){
                 erase.setAttribute('type','image')
                 erase.setAttribute('id','del')
                 erase.setAttribute('alt','delete')
-                erase.setAttribute("onclick","deleteList()")
+                erase.addEventListener("click",deleteList)
     
                 section.appendChild(para)
                 cDiv.appendChild(check)
